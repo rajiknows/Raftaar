@@ -1,5 +1,7 @@
 use std::os::unix::net::SocketAddr;
 
+mod election;
+mod rpc;
 /// 2025 8 june
 ///
 /// This is a toy project of mine that may or may not be used in production in my upcoming project
@@ -13,7 +15,6 @@ use std::os::unix::net::SocketAddr;
 /// 1. https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro
 ///
 ///
-mod rpc;
 /// A Raft cluster contains several servers; five is a typical
 /// number, which allows the system to tolerate two failures.
 /// At any given time each server is in one of three states:
@@ -45,11 +46,18 @@ impl RaftConsensus for Cluster {
 
 // this will tell the servers which term it is currently , who is the leader etc
 pub struct Term {
+    term_number: usize,
     stale_leaders: Vec<Node>,
 }
 
 // Node represents a general node in the cluster , it can be leader or follower
 pub struct Node {
     addr: SocketAddr,
-    curr_term_no: u16,
+    curr_term_no: usize,
+}
+
+pub struct LogEntry {
+    Command: String,
+    term_number: usize,
+    index: usize,
 }

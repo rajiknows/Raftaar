@@ -8,7 +8,22 @@
  * and they issue RPCs in parallel for best performance.
 */
 
+pub type currTerm = u16;
+
+#[derive(Debug, Clone)]
+pub struct AppendEntriesStruct {
+    curr_term: currTerm,
+    key: Option<String>,
+    val: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct RequestVoteStruct {
+    curr_term: currTerm,
+}
+
+#[derive(Debug, Clone)]
 pub enum Requests {
-    RequestVote,
-    AppendEntries,
+    RequestVote(RequestVoteStruct),
+    AppendEntries(AppendEntriesStruct),
 }
