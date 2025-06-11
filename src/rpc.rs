@@ -8,22 +8,48 @@
  * and they issue RPCs in parallel for best performance.
 */
 
-pub type currTerm = u16;
+use crate::proto::raft_server::Raft;
 
 #[derive(Debug, Clone)]
-pub struct AppendEntriesStruct {
-    curr_term: currTerm,
-    key: Option<String>,
-    val: Option<String>,
-}
+pub struct RaftNode {}
 
-#[derive(Debug, Clone)]
-pub struct RequestVoteStruct {
-    curr_term: currTerm,
-}
-
-#[derive(Debug, Clone)]
-pub enum Requests {
-    RequestVote(RequestVoteStruct),
-    AppendEntries(AppendEntriesStruct),
+impl Raft for RaftNode {
+    fn append_entries<'life0, 'async_trait>(
+        &'life0 self,
+        request: tonic::Request<crate::proto::AppendEntriesRequest>,
+    ) -> ::core::pin::Pin<
+        Box<
+            dyn ::core::future::Future<
+                    Output = std::result::Result<
+                        tonic::Response<crate::proto::AppendEntriesResponse>,
+                        tonic::Status,
+                    >,
+                > + ::core::marker::Send
+                + 'async_trait,
+        >,
+    >
+    where
+        'life0: 'async_trait,
+        Self: 'async_trait,
+    {
+    }
+    fn request_vote<'life0, 'async_trait>(
+        &'life0 self,
+        request: tonic::Request<crate::proto::RequestVoteRequest>,
+    ) -> ::core::pin::Pin<
+        Box<
+            dyn ::core::future::Future<
+                    Output = std::result::Result<
+                        tonic::Response<crate::proto::RequestVoteResponse>,
+                        tonic::Status,
+                    >,
+                > + ::core::marker::Send
+                + 'async_trait,
+        >,
+    >
+    where
+        'life0: 'async_trait,
+        Self: 'async_trait,
+    {
+    }
 }

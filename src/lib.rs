@@ -1,6 +1,7 @@
 use std::os::unix::net::SocketAddr;
 
 mod election;
+mod proto;
 mod rpc;
 /// 2025 8 june
 ///
@@ -10,7 +11,7 @@ mod rpc;
 ///
 /// during this whole implementation i will not use LLMs to code any part of the thing
 ///
-/// i will but refer to the following papers :
+/// i will but "refer" to the following papers :
 ///
 /// 1. https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro
 ///
